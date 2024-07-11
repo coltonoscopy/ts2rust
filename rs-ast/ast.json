@@ -1,0 +1,377 @@
+{
+  "items": [
+    {
+      "use": {
+        "tree": {
+          "ident": "std"
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "std",
+            "tree": "*"
+          }
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "std",
+            "tree": {
+              "ident": "fs"
+            }
+          }
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "syn",
+            "tree": {
+              "group": [
+                {
+                  "ident": "File"
+                },
+                {
+                  "ident": "parse_file"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "fs",
+            "tree": {
+              "rename": {
+                "ident": "func",
+                "rename": "fs_func"
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "fs",
+            "tree": {
+              "group": [
+                {
+                  "rename": {
+                    "ident": "func",
+                    "rename": "fs_func"
+                  }
+                },
+                {
+                  "rename": {
+                    "ident": "func2",
+                    "rename": "fs_func2"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "syn_serde",
+            "tree": {
+              "ident": "json"
+            }
+          }
+        }
+      }
+    },
+    {
+      "fn": {
+        "ident": "main",
+        "inputs": [],
+        "output": null,
+        "stmts": [
+          {
+            "let": {
+              "pat": {
+                "ident": {
+                  "ident": "filename"
+                }
+              },
+              "init": {
+                "expr": {
+                  "method_call": {
+                    "receiver": {
+                      "method_call": {
+                        "receiver": {
+                          "call": {
+                            "func": {
+                              "path": {
+                                "segments": [
+                                  {
+                                    "ident": "std"
+                                  },
+                                  {
+                                    "ident": "env"
+                                  },
+                                  {
+                                    "ident": "args"
+                                  }
+                                ]
+                              }
+                            },
+                            "args": []
+                          }
+                        },
+                        "method": "nth",
+                        "args": [
+                          {
+                            "lit": {
+                              "int": "1"
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "method": "expect",
+                    "args": [
+                      {
+                        "lit": {
+                          "str": "\"no filename given\""
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "let": {
+              "pat": {
+                "ident": {
+                  "ident": "content"
+                }
+              },
+              "init": {
+                "expr": {
+                  "method_call": {
+                    "receiver": {
+                      "call": {
+                        "func": {
+                          "path": {
+                            "segments": [
+                              {
+                                "ident": "fs"
+                              },
+                              {
+                                "ident": "read_to_string"
+                              }
+                            ]
+                          }
+                        },
+                        "args": [
+                          {
+                            "reference": {
+                              "expr": {
+                                "path": {
+                                  "segments": [
+                                    {
+                                      "ident": "filename"
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "method": "expect",
+                    "args": [
+                      {
+                        "lit": {
+                          "str": "\"cannot read file\""
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "let": {
+              "pat": {
+                "type": {
+                  "pat": {
+                    "ident": {
+                      "ident": "ast"
+                    }
+                  },
+                  "ty": {
+                    "path": {
+                      "segments": [
+                        {
+                          "ident": "File"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              "init": {
+                "expr": {
+                  "method_call": {
+                    "receiver": {
+                      "call": {
+                        "func": {
+                          "path": {
+                            "segments": [
+                              {
+                                "ident": "parse_file"
+                              }
+                            ]
+                          }
+                        },
+                        "args": [
+                          {
+                            "reference": {
+                              "expr": {
+                                "path": {
+                                  "segments": [
+                                    {
+                                      "ident": "content"
+                                    }
+                                  ]
+                                }
+                              }
+                            }
+                          }
+                        ]
+                      }
+                    },
+                    "method": "expect",
+                    "args": [
+                      {
+                        "lit": {
+                          "str": "\"cannot parse file\""
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "let": {
+              "pat": {
+                "ident": {
+                  "ident": "buf"
+                }
+              },
+              "init": {
+                "expr": {
+                  "call": {
+                    "func": {
+                      "path": {
+                        "segments": [
+                          {
+                            "ident": "json"
+                          },
+                          {
+                            "ident": "to_string_pretty"
+                          }
+                        ]
+                      }
+                    },
+                    "args": [
+                      {
+                        "reference": {
+                          "expr": {
+                            "path": {
+                              "segments": [
+                                {
+                                  "ident": "ast"
+                                }
+                              ]
+                            }
+                          }
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "expr": [
+              {
+                "method_call": {
+                  "receiver": {
+                    "call": {
+                      "func": {
+                        "path": {
+                          "segments": [
+                            {
+                              "ident": "fs"
+                            },
+                            {
+                              "ident": "write"
+                            }
+                          ]
+                        }
+                      },
+                      "args": [
+                        {
+                          "lit": {
+                            "str": "\"ast.json\""
+                          }
+                        },
+                        {
+                          "path": {
+                            "segments": [
+                              {
+                                "ident": "buf"
+                              }
+                            ]
+                          }
+                        }
+                      ]
+                    }
+                  },
+                  "method": "expect",
+                  "args": [
+                    {
+                      "lit": {
+                        "str": "\"cannot write file\""
+                      }
+                    }
+                  ]
+                }
+              },
+              true
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

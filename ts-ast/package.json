@@ -1,0 +1,16 @@
+{
+  "name": "ts-ast",
+  "version": "1.0.0",
+  "description": "",
+  "main": "ast-generator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ast-generator.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "flatted": "^3.3.1",
+    "typescript": "^5.5.2"
+  }
+}

@@ -1,0 +1,367 @@
+{
+  "kind": 307,
+  "flags": 0,
+  "statements": [
+    {
+      "kind": 272,
+      "flags": 0,
+      "importClause": {
+        "kind": 273,
+        "flags": 0,
+        "isTypeOnly": false,
+        "namedBindings": {
+          "kind": 275,
+          "flags": 0,
+          "elements": [
+            {
+              "kind": 276,
+              "flags": 0,
+              "isTypeOnly": false,
+              "name": {
+                "kind": 80,
+                "flags": 0,
+                "escapedText": "createContext"
+              }
+            },
+            {
+              "kind": 276,
+              "flags": 0,
+              "isTypeOnly": false,
+              "name": {
+                "kind": 80,
+                "flags": 0,
+                "escapedText": "useContext"
+              }
+            },
+            {
+              "kind": 276,
+              "flags": 0,
+              "isTypeOnly": false,
+              "name": {
+                "kind": 80,
+                "flags": 0,
+                "escapedText": "useEffect"
+              }
+            }
+          ]
+        }
+      },
+      "moduleSpecifier": {
+        "kind": 11,
+        "flags": 0,
+        "text": "react",
+        "hasExtendedUnicodeEscape": false
+      }
+    },
+    {
+      "kind": 272,
+      "flags": 0,
+      "importClause": {
+        "kind": 273,
+        "flags": 0,
+        "isTypeOnly": false,
+        "name": {
+          "kind": 80,
+          "flags": 0,
+          "escapedText": "fs"
+        }
+      },
+      "moduleSpecifier": {
+        "kind": 11,
+        "flags": 0,
+        "text": "fs",
+        "hasExtendedUnicodeEscape": false
+      }
+    },
+    {
+      "kind": 272,
+      "flags": 0,
+      "importClause": {
+        "kind": 273,
+        "flags": 0,
+        "isTypeOnly": false,
+        "namedBindings": {
+          "kind": 274,
+          "flags": 0,
+          "name": {
+            "kind": 80,
+            "flags": 0,
+            "escapedText": "R"
+          }
+        }
+      },
+      "moduleSpecifier": {
+        "kind": 11,
+        "flags": 0,
+        "text": "ramda",
+        "hasExtendedUnicodeEscape": false
+      }
+    },
+    {
+      "kind": 262,
+      "flags": 0,
+      "name": {
+        "kind": 80,
+        "flags": 0,
+        "escapedText": "foo"
+      },
+      "parameters": [],
+      "body": {
+        "kind": 241,
+        "flags": 0,
+        "statements": [
+          {
+            "kind": 244,
+            "flags": 0,
+            "expression": {
+              "kind": 213,
+              "flags": 0,
+              "expression": {
+                "kind": 211,
+                "flags": 0,
+                "expression": {
+                  "kind": 80,
+                  "flags": 0,
+                  "escapedText": "console"
+                },
+                "name": {
+                  "kind": 80,
+                  "flags": 0,
+                  "escapedText": "log"
+                }
+              },
+              "arguments": [
+                {
+                  "kind": 11,
+                  "flags": 0,
+                  "text": "foo",
+                  "hasExtendedUnicodeEscape": false
+                }
+              ]
+            }
+          }
+        ],
+        "multiLine": true
+      }
+    },
+    {
+      "kind": 243,
+      "flags": 0,
+      "declarationList": {
+        "kind": 261,
+        "flags": 2,
+        "declarations": [
+          {
+            "kind": 260,
+            "flags": 0,
+            "name": {
+              "kind": 80,
+              "flags": 0,
+              "escapedText": "bar"
+            },
+            "initializer": {
+              "kind": 219,
+              "flags": 0,
+              "parameters": [],
+              "equalsGreaterThanToken": {
+                "kind": 39,
+                "flags": 0
+              },
+              "body": {
+                "kind": 241,
+                "flags": 0,
+                "statements": [
+                  {
+                    "kind": 244,
+                    "flags": 0,
+                    "expression": {
+                      "kind": 213,
+                      "flags": 0,
+                      "expression": {
+                        "kind": 211,
+                        "flags": 0,
+                        "expression": {
+                          "kind": 80,
+                          "flags": 0,
+                          "escapedText": "console"
+                        },
+                        "name": {
+                          "kind": 80,
+                          "flags": 0,
+                          "escapedText": "log"
+                        }
+                      },
+                      "arguments": [
+                        {
+                          "kind": 11,
+                          "flags": 0,
+                          "text": "bar",
+                          "hasExtendedUnicodeEscape": false
+                        }
+                      ]
+                    }
+                  }
+                ],
+                "multiLine": true
+              }
+            }
+          }
+        ]
+      }
+    },
+    {
+      "kind": 262,
+      "flags": 0,
+      "name": {
+        "kind": 80,
+        "flags": 0,
+        "escapedText": "baz"
+      },
+      "parameters": [
+        {
+          "kind": 169,
+          "flags": 0,
+          "name": {
+            "kind": 80,
+            "flags": 0,
+            "escapedText": "arg"
+          },
+          "type": {
+            "kind": 150,
+            "flags": 0
+          }
+        }
+      ],
+      "body": {
+        "kind": 241,
+        "flags": 0,
+        "statements": [
+          {
+            "kind": 243,
+            "flags": 0,
+            "declarationList": {
+              "kind": 261,
+              "flags": 1,
+              "declarations": [
+                {
+                  "kind": 260,
+                  "flags": 0,
+                  "name": {
+                    "kind": 80,
+                    "flags": 0,
+                    "escapedText": "result"
+                  },
+                  "initializer": {
+                    "kind": 226,
+                    "flags": 0,
+                    "left": {
+                      "kind": 80,
+                      "flags": 0,
+                      "escapedText": "arg"
+                    },
+                    "operatorToken": {
+                      "kind": 42,
+                      "flags": 0
+                    },
+                    "right": {
+                      "kind": 9,
+                      "flags": 0,
+                      "text": "2",
+                      "numericLiteralFlags": 0
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": 243,
+            "flags": 0,
+            "declarationList": {
+              "kind": 261,
+              "flags": 2,
+              "declarations": [
+                {
+                  "kind": 260,
+                  "flags": 0,
+                  "name": {
+                    "kind": 80,
+                    "flags": 0,
+                    "escapedText": "result2"
+                  },
+                  "initializer": {
+                    "kind": 213,
+                    "flags": 0,
+                    "expression": {
+                      "kind": 211,
+                      "flags": 0,
+                      "expression": {
+                        "kind": 80,
+                        "flags": 0,
+                        "escapedText": "R"
+                      },
+                      "name": {
+                        "kind": 80,
+                        "flags": 0,
+                        "escapedText": "add"
+                      }
+                    },
+                    "arguments": [
+                      {
+                        "kind": 80,
+                        "flags": 0,
+                        "escapedText": "result"
+                      },
+                      {
+                        "kind": 9,
+                        "flags": 0,
+                        "text": "10",
+                        "numericLiteralFlags": 0
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "kind": 253,
+            "flags": 0,
+            "expression": {
+              "kind": 80,
+              "flags": 0,
+              "escapedText": "result2"
+            }
+          }
+        ],
+        "multiLine": true
+      }
+    }
+  ],
+  "endOfFileToken": {
+    "kind": 1,
+    "flags": 0
+  },
+  "text": "import { createContext, useContext, useEffect } from 'react';\r\nimport fs from 'fs';\r\nimport * as R from 'ramda';\r\n\r\nfunction foo() {\r\n  console.log('foo');\r\n}\r\n\r\nconst bar = () => {\r\n  console.log('bar');\r\n};\r\n\r\nfunction baz(arg: number) {\r\n  let result = arg * 2;\r\n  const result2 = R.add(result, 10);\r\n  return result2; \r\n}",
+  "fileName": "import-ast.ts",
+  "path": "",
+  "resolvedPath": "",
+  "originalFileName": "",
+  "languageVersion": 99,
+  "languageVariant": 0,
+  "scriptKind": 3,
+  "isDeclarationFile": false,
+  "hasNoDefaultLib": false,
+  "nodeCount": 69,
+  "identifierCount": 20,
+  "symbolCount": 0,
+  "parseDiagnostics": [],
+  "bindDiagnostics": [],
+  "pragmas": {},
+  "referencedFiles": [],
+  "typeReferenceDirectives": [],
+  "libReferenceDirectives": [],
+  "amdDependencies": [],
+  "identifiers": {},
+  "jsDocParsingMode": 0
+}

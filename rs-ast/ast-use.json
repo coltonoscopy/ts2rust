@@ -1,0 +1,335 @@
+{
+  "items": [
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "react",
+            "tree": {
+              "group": [
+                {
+                  "ident": "createContext"
+                },
+                {
+                  "ident": "useContext"
+                },
+                {
+                  "ident": "useEffect"
+                }
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "react",
+            "tree": {
+              "ident": "useRef"
+            }
+          }
+        }
+      }
+    },
+    {
+      "use": {
+        "tree": {
+          "path": {
+            "ident": "ramda",
+            "tree": "*"
+          }
+        }
+      }
+    },
+    {
+      "fn": {
+        "ident": "foo",
+        "inputs": [],
+        "output": null,
+        "stmts": [
+          {
+            "macro": {
+              "path": {
+                "segments": [
+                  {
+                    "ident": "println"
+                  }
+                ]
+              },
+              "delimiter": "paren",
+              "tokens": [
+                {
+                  "lit": "\"foo\""
+                }
+              ],
+              "semi_token": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fn": {
+        "ident": "bar",
+        "inputs": [],
+        "output": null,
+        "stmts": [
+          {
+            "macro": {
+              "path": {
+                "segments": [
+                  {
+                    "ident": "println"
+                  }
+                ]
+              },
+              "delimiter": "paren",
+              "tokens": [
+                {
+                  "lit": "\"bar\""
+                }
+              ],
+              "semi_token": true
+            }
+          }
+        ]
+      }
+    },
+    {
+      "fn": {
+        "ident": "add",
+        "inputs": [
+          {
+            "typed": {
+              "pat": {
+                "ident": {
+                  "ident": "a"
+                }
+              },
+              "ty": {
+                "path": {
+                  "segments": [
+                    {
+                      "ident": "i32"
+                    }
+                  ]
+                }
+              }
+            }
+          },
+          {
+            "typed": {
+              "pat": {
+                "ident": {
+                  "ident": "b"
+                }
+              },
+              "ty": {
+                "path": {
+                  "segments": [
+                    {
+                      "ident": "i32"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "output": {
+          "path": {
+            "segments": [
+              {
+                "ident": "i32"
+              }
+            ]
+          }
+        },
+        "stmts": [
+          {
+            "expr": [
+              {
+                "return": {
+                  "expr": {
+                    "binary": {
+                      "left": {
+                        "path": {
+                          "segments": [
+                            {
+                              "ident": "a"
+                            }
+                          ]
+                        }
+                      },
+                      "op": "+",
+                      "right": {
+                        "path": {
+                          "segments": [
+                            {
+                              "ident": "b"
+                            }
+                          ]
+                        }
+                      }
+                    }
+                  }
+                }
+              },
+              true
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "fn": {
+        "ident": "baz",
+        "inputs": [
+          {
+            "typed": {
+              "pat": {
+                "ident": {
+                  "ident": "arg"
+                }
+              },
+              "ty": {
+                "path": {
+                  "segments": [
+                    {
+                      "ident": "i32"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        ],
+        "output": null,
+        "stmts": [
+          {
+            "let": {
+              "pat": {
+                "ident": {
+                  "ident": "result"
+                }
+              },
+              "init": {
+                "expr": {
+                  "binary": {
+                    "left": {
+                      "path": {
+                        "segments": [
+                          {
+                            "ident": "arg"
+                          }
+                        ]
+                      }
+                    },
+                    "op": "*",
+                    "right": {
+                      "lit": {
+                        "int": "2"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          {
+            "item": {
+              "const": {
+                "ident": "result2",
+                "ty": {
+                  "path": {
+                    "segments": [
+                      {
+                        "ident": "i32"
+                      }
+                    ]
+                  }
+                },
+                "expr": {
+                  "call": {
+                    "func": {
+                      "path": {
+                        "segments": [
+                          {
+                            "ident": "add"
+                          }
+                        ]
+                      }
+                    },
+                    "args": [
+                      {
+                        "path": {
+                          "segments": [
+                            {
+                              "ident": "result"
+                            }
+                          ]
+                        }
+                      },
+                      {
+                        "lit": {
+                          "int": "10"
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          },
+          {
+            "expr": [
+              {
+                "method_call": {
+                  "receiver": {
+                    "path": {
+                      "segments": [
+                        {
+                          "ident": "useRef"
+                        }
+                      ]
+                    }
+                  },
+                  "method": "test",
+                  "args": [
+                    {
+                      "lit": {
+                        "str": "\"hello\""
+                      }
+                    }
+                  ]
+                }
+              },
+              true
+            ]
+          },
+          {
+            "expr": [
+              {
+                "return": {
+                  "expr": {
+                    "path": {
+                      "segments": [
+                        {
+                          "ident": "result2"
+                        }
+                      ]
+                    }
+                  }
+                }
+              },
+              true
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
