@@ -104,7 +104,7 @@
 (defn unnest-vector [coll]
   (mapcat #(if (vector? %) % [%]) coll))
 (defn rs-ast-root [node] {:items (unnest-vector (:statements node))})
-(defn cl-print [x] (doto x (print)))
+(defn cl-print [x] (doto x (println)))
 
 ;; funcs that take in an ast node for TS/JS and return the
 ;; equivalent Rust AST node
@@ -117,8 +117,7 @@
 (defn node->shebang-trivia [node] node)
 (defn node->conflict-marker-trivia [node] node)
 (defn node->numeric-literal [node]
-  {:kind :NumericLiteral
-   :value (get-in node [:value :text])})
+  {:lit {:int (:text node)}})
 (defn node->string-literal [node]
   {:lit {:str (:text node)}})
 (defn node->import-declaration [node]
@@ -145,14 +144,14 @@
 
 (defn node->parenthesized-expression [node] node)
 (defn node->function-expression [node] node)
-(defn node->block [node] (:statements node))
+(defn node->block [node] (unnest-vector (:statements node)))
 
 ;; return `:declarationList` if it exists, else the node itself
 (defn node->variable-statement [node]
   (if-let [declarationList (:declarationList node)]
     declarationList
     node))
-(defn node->expression-statement [node] node)
+(defn node->expression-statement [node] (:expression node))
 (defn node->import-specifier [node] (:name node))
 (defn node->identifier [node]
   {:ident (camel->snake (:escapedText node))})
@@ -161,7 +160,10 @@
 (defn node->namespace-import [_]
   {:ident "*"})
 (defn node->function-declaration [node]
-  {:fn {:ident (:name node) :inputs (:parameters node) :stmts (mapv :expression (:body node))}})
+  (let [body (:body node)]
+    {:fn
+     {:ident (:name node) :inputs (:parameters node)
+      :stmts (vec body)}}))
 (defn node->return-statement [node]
   {:return {:expr {:path {:segments (:expression node)}}}})
 (defn node->parameter [node]
@@ -172,18 +174,28 @@
 (defn node->arrow-function [node] (node->function-declaration node))
 (defn node->binary-expression [node]
   (let [left (get-in node [:left :ident])
-        op (get-in node [:operatorToken :kind])
-        right (get-in node [:right :ident])]
+        op (get-in node [:operatorToken :ident])
+        right (get-in node [:right])]
     {:expr {:binary {:left left :op op :right right}}}))
 (defn node->asterisk-token [_] {:ident "*"})
+
+(defmacro if-let*
+  "Multiple binding version of if-let"
+  ([bindings then] `(if-let* ~bindings ~then nil))
+  ([bindings then else] (if (seq bindings)
+                          `(if-let [~(first bindings) ~(second bindings)]
+                             (if-let* ~(vec (drop 2 bindings)) ~then ~else)
+                           ~else)
+                          then)))
 
 ;; if `initializer` is present, it's a variable declaration with an assignment
 ;; and so we need to return `initializer` and insert :name.:ident into it
 (defn node->variable-declaration [node]
-  (if-let [initializer (:initializer node)]
+  (if-let* [initializer (:initializer node)
+           func (:fn initializer)]
     (let [ident (get-in node [:name :ident])]
       (assoc-in initializer [:fn :ident] ident))
-    {:ident (get-in node [:name :ident])}))
+    (merge (:initializer node) {:ident (get-in node [:name :ident])})))
 
 (defn node->variable-declaration-list [node] (:declarations node))
 
@@ -256,6 +268,15 @@
         args (join ", " (:args node))]
     (str receiver "." method "(" args ");")))
 
+(defn print-assignment-expression [node]
+  (let [expr (:expr node)
+        ident (:ident node)]
+    (str ident " = " expr ";")))
+
+(defn print-binary-expression [node]
+  (let [binary (:binary node)]
+    (str (:left binary) " " (:op binary) " " (:right binary))))
+
 (def kind-print-map
   {#{:block}                   print-block
    #{:use}                     print-use
@@ -277,7 +298,12 @@
    #{:text}                    #(:text %)
    #{:str}                     #(str "\"" (:str %) "\"")
    #{:lit}                     #(:lit %)
-   #{:receiver :method :args}  print-method-call})
+   #{:int}                     #(:int %)
+   #{:receiver :method :args}  print-method-call
+   #{:expr :ident}             print-assignment-expression
+   #{:binary}                  print-binary-expression
+   #{:method_call :ident}      #(str (:ident %) " = " (:method_call %))
+   })
 
 ;; walk the typescript AST and convert it to a Rust AST, depth-first
 (defn ast-ts->rs [ts-ast]

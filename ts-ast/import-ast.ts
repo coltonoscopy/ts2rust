@@ -11,7 +11,6 @@ const bar = () => {
 };
 
 function baz(arg: number) {
-  const doc = { name: 'John' };
   let result = arg * 2;
   const result2 = R.add(result, 10);
   return result2; 
