@@ -147,9 +147,19 @@
 (defn node->block [node] (unnest-vector (:statements node)))
 
 ;; return `:declarationList` if it exists, else the node itself
+;; flags: 1 = let, 2 = const, 4 = var
 (defn node->variable-statement [node]
   (if-let [declarationList (:declarationList node)]
-    declarationList
+    (let [flags (:flags declarationList)
+          is-fn? (get-in declarationList [:declarations 0 :fn])]
+      (if (= flags 1)
+        {(if is-fn? :let-fn :let) declarationList}
+        (if (= flags 2)
+          {(if is-fn? :const-fn :const) declarationList}
+          (if (= flags 4)
+            {(if is-fn? :var-fn :var) declarationList}
+            node)))
+      )
     node))
 (defn node->expression-statement [node] (:expression node))
 (defn node->import-specifier [node] (:name node))
@@ -197,7 +207,7 @@
       (assoc-in initializer [:fn :ident] ident))
     (merge (:initializer node) {:ident (get-in node [:name :ident])})))
 
-(defn node->variable-declaration-list [node] (:declarations node))
+(defn node->variable-declaration-list [node] node)
 
 ;; { kind: SyntaxKind.SourceFile, tree: [...] } -> { items: [...] }
 (defn node->source-file [node] (rs-ast-root node))
@@ -302,7 +312,10 @@
    #{:receiver :method :args}  print-method-call
    #{:expr :ident}             print-assignment-expression
    #{:binary}                  print-binary-expression
-   #{:method_call :ident}      #(str (:ident %) " = " (:method_call %))
+   #{:method_call :ident}      #(str (:ident %) " = " (:method_call %)) 
+   #{:let}                     #(str "let " (first (:declarations (:let %)))) 
+   #{:const}                   #(str "const " (first (:declarations (:const %))))
+   #{:const-fn}                #(get-in % [:const-fn :declarations 0])
    })
 
 ;; walk the typescript AST and convert it to a Rust AST, depth-first

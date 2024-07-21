@@ -1,0 +1,1 @@
+{:config-in-ns {ts2rust.core {:linters {:unresolved-symbol {:level :off}}}}}
